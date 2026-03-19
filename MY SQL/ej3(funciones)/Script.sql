@@ -73,10 +73,68 @@ delimiter ;
 SELECT obtener_oficina_Empleado(484);
 
 
-# 4
+# 7
+DELIMITER //
+CREATE FUNCTION ObtenerGanacia(
+ p_orderNumber int,
+ p_productCode varchar(256)
+)
+RETURNS float
+DETERMINISTIC 
+BEGIN
+	RETURN( 
+		SELECT (o2.priceEach  - p.buyPrice)*o2.quantityOrdered    FROM orders o 
+		JOIN orderdetails o2 ON o2.orderNumber = o.orderNumber 
+		JOIN products p  ON p.productCode = o2.productCode 
+		WHERE o.orderNumber  = p_orderNumber
+		AND o2.productCode = p_productCode
+	);
+END //
+DELIMITER ;
 
 
+SELECT ObtenerGanacia(10100,"S18_1749") AS ganacia;
 
 
+# 8
 
 
+CREATE FUNCTION 
+
+
+# 10
+DROP FUNCTION IF EXISTS BuscanVentasPorDebajoPrecioRecomendado;
+
+DELIMITER // 
+
+CREATE FUNCTION BuscanVentasPorDebajoPrecioRecomendado(
+p_codigo_producto varchar(256)
+)
+RETURNS FLOAT
+DETERMINISTIC
+BEGIN
+	
+	DECLARE v_ordersTotal float DEFAULT 0;
+	DECLARE v_odersLowPrice float DEFAULT 0;
+	
+	
+	SELECT SUM(o.quantityOrdered ) into v_ordersTotal FROM products p 
+	JOIN orderdetails o ON o.productCode  = p.productCode 
+	WHERE o.productCode = p_codigo_producto;
+
+
+	SELECT SUM(o.quantityOrdered ) INTO v_odersLowPrice FROM products p 
+	JOIN orderdetails o ON o.productCode  = p.productCode 
+	WHERE o.productCode = p_codigo_producto
+	AND p.MSRP < o.priceEach ;
+	
+	IF v_ordersTotal = 0 OR v_ordersTotal IS NULL OR v_odersLowPrice IS NULL THEN
+        RETURN 0;
+    ELSE
+        RETURN (v_odersLowPrice * 100) / v_ordersTotal;
+    END IF;
+
+END //
+DELIMITER ;
+
+SELECT BuscanVentasPorDebajoPrecioRecomendado("S10_1678");
