@@ -204,4 +204,24 @@ DATE_SUB(CURRENT_DATE, INTERVAL 50 YEAR),
    CURRENT_DATE,
  "S10_1678") AS FindBestPaidProdInPeriod;
 
- 
+ # 14
+
+
+ DROP FUNCTION IF EXISTS getEmployeReportingLastName;
+DELIMITER //
+
+CREATE FUNCTION getEmployeReportingLastName(
+	p_employeeNumber INT
+)
+RETURNS VARCHAR(256)
+DETERMINISTIC
+BEGIN
+	RETURN(
+	SELECT e.lastName  FROM employees e 
+	WHERE e.employeeNumber = (SELECT e2.reportsTo   FROM employees e2 WHERE e2.employeeNumber = p_employeeNumber )
+	);
+END //
+
+DELIMITER ;
+
+SELECT getEmployeReportingLastName(1056) ;
