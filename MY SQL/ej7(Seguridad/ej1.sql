@@ -1,0 +1,8 @@
+CREATE USER 'analistaStock'@'localhost' IDENTIFIED BY RANDOM PASSWORD;
+CREATE USER 'gestorProducto'@'localhost' IDENTIFIED BY RANDOM PASSWORD;
+CREATE USER 'usuarioProducto'@'localhost' IDENTIFIED BY RANDOM PASSWORD;
+CREATE USER 'desarrollo'@'localhost' IDENTIFIED BY RANDOM PASSWORD;
+CREATE USER 'admin'@'localhost' IDENTIFIED BY RANDOM PASSWORD;
+
+SELECT * FROM mysql.`user` u 
+
