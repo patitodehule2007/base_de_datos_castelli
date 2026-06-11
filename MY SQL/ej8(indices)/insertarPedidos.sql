@@ -107,6 +107,28 @@ DELIMITER ;
 
 
 -- 2
+-- -> Rows fetched before execution  (cost=0..0 rows=1) (actual time=43e-6..80e-6 rows=1 loops=1)
 EXPLAIN ANALYZE SELECT * FROM orders o WHERE o.orderNumber = 50000;
 -- 3
-EXPLAIN ANALYZE SELECT * FROM orders o WHERE o.orderDate BETWEEN NOW() - INTERVAL 1 YEAR AND now();
+--  -> Filter: (o.orderDate between <cache>((now() - interval 1 year)) and <cache>(now()))  (cost=1475 rows=13386) (actual time=0.201..67.8 rows=60114 loops=1)
+--    -> Table scan on o  (cost=1475 rows=120486) (actual time=0.0158..62 rows=120494 loops=1)
+EXPLAIN ANALYZE SELECT * FROM orders o WHERE o.orderDate BETWEEN NOW() - INTERVAL 1 MONTH AND now();
+
+-- 4 
+CREATE INDEX idx_orders_orderDate ON orders(orderDate);
+--5 
+-- el analizer tomo casi todas ya que le es mas caro
+-- usar el indice para un 50 porciento de la tabla aprox
+-- -> Filter: (o.orderDate between <cache>((now() - interval 1 year)) and <cache>(now()))  (cost=12185 rows=60243) (actual time=0.195..69 rows=60114 loops=1)
+--    -> Table scan on o  (cost=12185 rows=120486) (actual time=0.0115..62.9 rows=120494 loops=1)
+
+-- 6
+CREATE INDEX idx_orders_cliente_estado ON orders(customerNumber, status);
+
+-- 7
+EXPLAIN ANALYZE SELECT * FROM orders WHERE customerNumber = 65940;
+---> Index lookup on orders using customerNumber (customerNumber=65940)  (cost=0.35 rows=1) (actual time=0.00903..0.00903 rows=0 loops=1)
+
+EXPLAIN ANALYZE SELECT * FROM orders WHERE customerNumber = 65940 AND status = 'Shipped';
+-- -> Filter: (orders.`status` = 'Shipped')  (cost=0.26 rows=0.1) (actual time=0.0353..0.0353 rows=0 loops=1)
+--    -> Index lookup on orders using customerNumber (customerNumber=65940)  (cost=0.26 rows=1) (actual time=0.0348..0.0348 rows=0 loops=1)
