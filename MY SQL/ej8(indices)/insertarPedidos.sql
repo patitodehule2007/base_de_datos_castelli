@@ -103,3 +103,10 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+
+-- 2
+EXPLAIN ANALYZE SELECT * FROM orders o WHERE o.orderNumber = 50000;
+-- 3
+EXPLAIN ANALYZE SELECT * FROM orders o WHERE o.orderDate BETWEEN NOW() - INTERVAL 1 YEAR AND now();
