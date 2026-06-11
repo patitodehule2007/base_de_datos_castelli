@@ -1,0 +1,7 @@
+analistaStock -> solo puede leer y ejecutar procedures
+gestorProducto -> solo puede leer stocks y ejecutar algunos procedures
+usuarioProducto -> igual q gestorProducto
+desarrollo -> puede hacer todo
+admin -> no puede hacer nada
+rrhh_user -> solo puede ver 4 columnas de employees y ejecutar contar_empleados
+operador_stock -> solo puede ejecutar actualizarStock
