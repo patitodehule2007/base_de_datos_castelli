@@ -1,0 +1,68 @@
+{
+    "SELECT * FROM performance_schema.error_log el \nORDER BY el.LOGGED \nLIMIT 20": [
+        {
+            "LOGGED": "2026-08-06 07:45:40.974344",
+            "THREAD_ID": 0,
+            "PRIO": "System",
+            "ERROR_CODE": "MY-010116",
+            "SUBSYSTEM": "Server",
+            "DATA": "\/usr\/sbin\/mysqld (mysqld 8.0.46-0ubuntu0.24.04.3) starting as process 1787"
+        },
+        {
+            "LOGGED": "2026-08-06 07:45:40.990165",
+            "THREAD_ID": 1,
+            "PRIO": "System",
+            "ERROR_CODE": "MY-013576",
+            "SUBSYSTEM": "InnoDB",
+            "DATA": "InnoDB initialization has started."
+        },
+        {
+            "LOGGED": "2026-08-06 07:45:41.356279",
+            "THREAD_ID": 1,
+            "PRIO": "System",
+            "ERROR_CODE": "MY-013577",
+            "SUBSYSTEM": "InnoDB",
+            "DATA": "InnoDB initialization has ended."
+        },
+        {
+            "LOGGED": "2026-08-06 07:45:41.692571",
+            "THREAD_ID": 0,
+            "PRIO": "Warning",
+            "ERROR_CODE": "MY-010068",
+            "SUBSYSTEM": "Server",
+            "DATA": "CA certificate ca.pem is self signed."
+        },
+        {
+            "LOGGED": "2026-08-06 07:45:41.692599",
+            "THREAD_ID": 0,
+            "PRIO": "System",
+            "ERROR_CODE": "MY-013602",
+            "SUBSYSTEM": "Server",
+            "DATA": "Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel."
+        },
+        {
+            "LOGGED": "2026-08-06 07:45:41.731014",
+            "THREAD_ID": 0,
+            "PRIO": "System",
+            "ERROR_CODE": "MY-011323",
+            "SUBSYSTEM": "Server",
+            "DATA": "X Plugin ready for connections. Bind-address: '127.0.0.1' port: 33060, socket: \/var\/run\/mysqld\/mysqlx.sock"
+        },
+        {
+            "LOGGED": "2026-08-06 07:45:41.731095",
+            "THREAD_ID": 0,
+            "PRIO": "System",
+            "ERROR_CODE": "MY-010931",
+            "SUBSYSTEM": "Server",
+            "DATA": "\/usr\/sbin\/mysqld: ready for connections. Version: '8.0.46-0ubuntu0.24.04.3'  socket: '\/var\/run\/mysqld\/mysqld.sock'  port: 3306  (Ubuntu)."
+        },
+        {
+            "LOGGED": "2026-08-06 07:46:20.114708",
+            "THREAD_ID": 8,
+            "PRIO": "Warning",
+            "ERROR_CODE": "MY-013360",
+            "SUBSYSTEM": "Server",
+            "DATA": "Plugin mysql_native_password reported: ''mysql_native_password' is deprecated and will be removed in a future release. Please use caching_sha2_password instead'"
+        }
+    ]
+}
