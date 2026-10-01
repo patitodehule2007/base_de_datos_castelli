@@ -1,0 +1,1 @@
+db["ej1"].find({ compras: { $elemMatch: { monto: { $gt: 250 } }, productos: "televisor" } })

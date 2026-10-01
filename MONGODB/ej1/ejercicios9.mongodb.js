@@ -1,0 +1,1 @@
+db["ej1"].find({}, { "compra.idCompra": 1, "compra.monto": 1 }).sor({ "Compra Monto": -1 })
