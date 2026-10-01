@@ -1,0 +1,1 @@
+db["ej1"].find({ compras: { $exists: 5 } }, { compras: 1 })

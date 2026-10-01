@@ -1,0 +1,1 @@
+db["ej1"].find({ "compras.id_compra": { $eq: 1 } }, { compras: { productos: 1 } })

@@ -1,0 +1,1 @@
+db["ej1"].updateOne({ nombre: "Lucas", apellido: "Martínez" }, { $set: { mail: "lucas.m@gmail.com" } })
