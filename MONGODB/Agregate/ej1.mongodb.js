@@ -1,0 +1,1 @@
+db.Cliente.aggregate([{ $group: { _id: null, promedioEdad: { $avg: "$edad" } } }])
